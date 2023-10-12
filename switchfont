@@ -1,6 +1,6 @@
 #!/bin/sh
 
-font=$(fc-list | grep -i mono | cut -d':' -f2 | cut -d',' -f1 | cut -c2- | sort | uniq | rofi -dmenu -i)
+font=$(fc-list | cut -d':' -f2 | cut -d',' -f1 | cut -c2- | grep -i mono |  sort | uniq | rofi -dmenu -i)
 
 template=$(cat ~/.config/alacritty/template.yml)
 
