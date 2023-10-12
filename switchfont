@@ -1,0 +1,7 @@
+#!/bin/sh
+
+font=$(fc-list | grep -i mono | cut -d':' -f2 | cut -d',' -f1 | cut -c2- | sort | uniq | rofi -dmenu -i)
+
+template=$(cat ~/.config/alacritty/template.yml)
+
+echo "$template" | sed "s/%%/${font}/g" > ~/.config/alacritty/alacritty.yml
