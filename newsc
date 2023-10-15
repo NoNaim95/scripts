@@ -1,0 +1,17 @@
+#!/bin/elvish
+
+use os
+
+if (eq (count $args) (num 1)) {
+    var file = {~}'/scripts/'$args[0]
+    if (os:exists $file) {
+        echo "Script already exists! Exiting."
+        exit
+    }
+    touch $file
+    echo "#!/bin/elvish" > $file
+    chmod +x $file
+    nvim $file
+} else {
+    echo "newsc [SCRIPTNAME]"
+}
