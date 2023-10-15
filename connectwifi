@@ -1,0 +1,23 @@
+#!/bin/elvish
+
+use utils
+use str
+
+var out = [(nmcli dev wifi list)][1..]
+var cleaned
+
+var @cleaned = (each {
+    |x| str:trim $x '*'     |^
+    str:trim-space (all)
+} $out )
+
+var @ssids = (compact [(for line $cleaned {
+        var idx = (str:index $line "Mbit")
+        put [(str:fields $line[0..(- $idx 1)])][1..-3] |^
+        str:join " " (all)
+})])
+
+var ssid = (utils:pick_option (utils:in_terminal) &list=$ssids)
+
+sudo nmcli dev wifi connect $ssid
+
