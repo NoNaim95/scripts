@@ -3,7 +3,7 @@
 use utils
 use str
 
-var out = [(nmcli dev wifi list)][1..]
+var out = [(nmcli device wifi rescan ; nmcli device wifi list)][1..]
 var cleaned
 
 var @cleaned = (each {
@@ -18,7 +18,9 @@ var @ssids = (compact [(order [(for line $cleaned {
         str:join " " (all)
 })])])
 
-var ssid = (utils:pick_option (utils:in_terminal) &list=$ssids)
+try {
+    var ssid = (utils:pick_option (utils:in_terminal) &list=$ssids)
+    sudo nmcli dev wifi connect $ssid
+} catch e { }
 
-sudo nmcli dev wifi connect $ssid
 
