@@ -1,0 +1,11 @@
+#!/bin/elvish
+
+var email_files = [(find {~}"/.mail/rwth/Inbox/" -type f -not -name ".*" )]
+var emails = [(each {|x| cat $x | slurp} $email_files)]
+var week_ids = [(each {|email|echo $email | grep "Date: " | sed 's/Date: //g' | each {|x| date -d $x "+%Y-W%V"}} $emails)]
+
+for i [(seq 1 (- (count $emails) 1))] {
+    var path = (to-string {~}"/.mail/rwth/"$week_ids[$i])
+    mkdir -p $path
+    cp -v $email_files[$i] $path
+}
