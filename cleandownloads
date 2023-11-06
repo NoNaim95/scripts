@@ -1,0 +1,12 @@
+#!/bin/elvish
+
+
+var files = [(find ~/Downloads/ -maxdepth 1 -type f )]
+var dates = [(ls --full-time ~/Downloads | awk '{print $6, $7}')]
+var ages = [(each {|file_date| - (date +%s) (date -d $file_date +%s)} $dates)]
+
+for i [(seq 0 (- (count $files) 1))] {
+    if (> $ages[$i] 172800) {
+        mv $files[$i] ~/Downloads/Trash/
+    }
+}
