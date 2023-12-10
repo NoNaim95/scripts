@@ -1,1 +1,1 @@
-find ~/uni/ -name "*.pdf" -type f | xdg-open $(rofi -dmenu)
+find ~/uni/ -name "*.pdf" -type f | sort | xdg-open $(rofi -dmenu)
