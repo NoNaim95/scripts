@@ -1,0 +1,2 @@
+#!/bin/elvish
+scrot --select -o /tmp/a.png; eog /tmp/a.png&
