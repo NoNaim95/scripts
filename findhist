@@ -1,0 +1,6 @@
+#!/bin/elvish
+use utils
+var in_terminal = (utils:in_terminal)
+try {
+    cat ~/.bash_history | utils:pick_option $in_terminal
+} catch e { }
