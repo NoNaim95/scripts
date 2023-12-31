@@ -1,0 +1,4 @@
+#!/bin/fish
+
+set templater_args (env | grep "templater" | cut -d"=" -f 2)
+$argv[1] $templater_args[1..-1]
