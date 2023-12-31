@@ -1,7 +1,7 @@
 #!/bin/elvish
 
 try {
-    var font = (fc-list | cut -d':' -f2 | cut -d',' -f1 | cut -c2- | grep -i mono |  sort | uniq | rofi -dmenu -i)
+    var font = (fonts | rofi -dmenu -i)
     var template = (cat ~/.config/alacritty/template.yml | read-bytes 1024)
     echo $template | sed "s/%%/"$font"/g" > ~/.config/alacritty/alacritty.yml
 } catch e {
