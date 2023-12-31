@@ -1,0 +1,16 @@
+#!/bin/fish
+
+switch $argv[1]
+    case Monday
+        echo "LA Vorlesung Progress:: "
+    case Tuesday
+        echo "Ana Vorlesung Progress:: "
+    case Wednesday
+    case Thursday
+    case Friday
+        echo "LA Vorlesung Progress:: "
+        echo "Ana Vorlesung Progress:: "
+    case Saturday
+        echo "Krefeld chillen dies das"
+    case Sunday
+end
