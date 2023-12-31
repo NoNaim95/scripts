@@ -1,0 +1,10 @@
+#!/bin/fish
+
+set -l connected (bluetoothctl info 14:3F:A6:A8:53:9E | grep -i connected | cut -d" " -f 2)
+
+if [ $connected = "no" ]
+    bluetoothctl connect 14:3F:A6:A8:53:9E
+else
+    bluetoothctl disconnect 14:3F:A6:A8:53:9E
+end
+
