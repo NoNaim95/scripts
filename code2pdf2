@@ -1,0 +1,6 @@
+#!/bin/bash
+
+printf "%s\n" $@ | xargs -P0 -I {} bash -c "\
+    highlight -o {}.html {}; wkhtmltopdf --enable-local-file-access {}.html {}.pdf; rm {}.html\
+"
+rm *.css
