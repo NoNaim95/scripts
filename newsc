@@ -2,16 +2,24 @@
 
 use os
 
-if (eq (count $args) (num 1)) {
-    var file = {~}'/scripts/'$args[0]
-    if (os:exists $file) {
-        echo "Script already exists! Exiting."
-        exit
-    }
-    touch $file
-    echo "#!/bin/elvish" > $file
-    chmod +x $file
-    nvim $file
-} else {
+if (> (count $args) 2) {
     echo "newsc [SCRIPTNAME]"
+    exit 255
 }
+
+var file = {~}'/scripts/'$args[0]
+if (os:exists $file) {
+    echo "Script already exists! Exiting."
+        exit
+}
+touch $file
+
+if (eq (count $args) (num 2)) {
+    echo "#!/bin/"$args[1] > $file
+}
+if (eq (count $args) (num 1)) {
+    echo "#!/bin/elvish" > $file
+}
+
+chmod +x $file
+nvim $file
