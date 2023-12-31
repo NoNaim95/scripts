@@ -1,0 +1,3 @@
+#!/bin/elvish
+
+try { scrot --select -o /tmp/latex.png; pix2tex /tmp/latex.png | sed 's/^[^:]*: //' | xclip -sel clip; notify-send "Latex Ready!" } catch e { }
