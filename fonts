@@ -1,2 +1,2 @@
-#!/bin/elvish
+#!/bin/bash
 fc-list | cut -d':' -f2 | cut -d',' -f1 | cut -c2- | grep -i mono |  sort | uniq
