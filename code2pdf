@@ -1,2 +1,9 @@
-#!/bin/elvish
-each {|file| highlight -o $file.html $file; wkhtmltopdf --enable-local-file-access $file.html $file.pdf&} $args
+#!/bin/bash
+
+printf "%s\n" $@ | xargs -P0 -I {} bash -c "\
+    highlight -o {}.html {}; wkhtmltopdf --enable-local-file-access {}.html {}.pdf; rm {}.html\
+"
+
+printf "%s\n" $@ | xargs -P0 -I code_file bash -c '\
+    find "$(realpath code_file | xargs dirname)" -name "*.css" -type f -delete\
+'
