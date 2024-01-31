@@ -1,0 +1,19 @@
+#!/bin/fish
+
+function main
+    if test (count $argv) -ne 2
+        echo "Usage: $argv[1] <timer_duration_minutes> <beep_interval_minutes>"
+        return 1
+    end
+
+    set timer_duration $argv[1]
+    set beep_interval $argv[2]
+
+    for i in (seq 1 (math floor $timer_duration / $beep_interval))
+        sleep $beep_interval"m"
+        play_beep
+    end
+    notify-send "Focus time is up"
+end
+
+main $argv
