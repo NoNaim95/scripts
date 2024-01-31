@@ -8,9 +8,15 @@ function main
 
     set timer_duration $argv[1]
     set beep_interval $argv[2]
+    set beep_interval_secs (math \($beep_interval x 60\))
 
     for i in (seq 1 (math floor $timer_duration / $beep_interval))
-        sleep $beep_interval"m"
+        for j in (seq 1 (math 60 x $beep_interval))
+            sleep 1
+            clear
+            set -l seconds_passed (math \($i - 1\) x $beep_interval_secs + $j)
+            echo $seconds_passed | awk '{printf "%02d:%02d passed\n", $1/60, $1%60}'
+        end
         play_beep
     end
     notify-send "Focus time is up"
