@@ -1,2 +1,13 @@
-#!/bin/elvish
-scrot --select -o /tmp/a.png; eog /tmp/a.png&
+#!/bin/python3
+import os
+import subprocess
+
+i = 1
+filename = f"/tmp/a{i}.png"
+while os.path.exists(filename):
+    i += 1
+    filename = f"/tmp/a{i}.png"
+
+
+subprocess.run(["scrot", "--select", "-o", filename])
+subprocess.Popen(["eog", filename],stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

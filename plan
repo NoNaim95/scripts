@@ -1,0 +1,4 @@
+#!/bin/fish
+
+obsidian&
+chromium --new-window "https://calendar.google.com/calendar/u/0/r"
